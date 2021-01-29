@@ -23,7 +23,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Вакансии
+                Инциденты
             </div>
             <div class="card-body">
                 <table class="table">
@@ -32,12 +32,13 @@
                         <th scope="col">Строки</th>
                     </tr>
                     </thead>
+                    </thead>
+                    </thead>
                     <tbody>
                     <c:forEach items="${list}" var="elem">
                         <tr>
                             <td>
-
-                                <c:out value="${elem}"/>
+                                <c:out value="${elem.name}"/>
                             </td>
                         </tr>
                     </c:forEach>
