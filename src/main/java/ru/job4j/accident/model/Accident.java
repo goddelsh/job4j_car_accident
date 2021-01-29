@@ -12,6 +12,14 @@ public class Accident {
         this.name = name;
     }
 
+    public Accident(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Accident() {
+    }
+
     public int getId() {
         return id;
     }

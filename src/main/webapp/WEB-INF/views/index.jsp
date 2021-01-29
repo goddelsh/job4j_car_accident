@@ -39,7 +39,12 @@
                     <c:forEach items="${list}" var="elem">
                         <tr>
                             <td>
+                                <span>
                                 <c:out value="${elem.name}"/>
+                                    </span>
+                                <span>
+                                <a href="<c:url value='/update?id=${elem.id}'/>">Изменить</a>
+                            </span>
                             </td>
                         </tr>
                     </c:forEach>
