@@ -15,9 +15,14 @@ import ru.job4j.accident.repository.AccidentMem;
 @Controller
 public class IndexControl {
 
+    final private AccidentMem accidentMem;
+
+    public IndexControl(AccidentMem accidentMem) {
+        this.accidentMem = accidentMem;
+    }
 
     @GetMapping("/")
-    public String index(Model model, AccidentMem accidentMem) {
+    public String index(Model model) {
         List<Accident> list = accidentMem.getAccidents()
                 .entrySet() // получаю сет
                 .stream() //стрим

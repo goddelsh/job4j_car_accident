@@ -26,6 +26,7 @@
                 Инциденты
             </div>
             <div class="card-body">
+                <a href="<c:url value='/create'/>">Добавить инцидент</a>
                 <table class="table">
                     <thead>
                     <tr>
