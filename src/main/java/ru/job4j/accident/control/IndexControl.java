@@ -23,11 +23,7 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Accident> list = accidentMem.getAccidents()
-                .entrySet() // получаю сет
-                .stream() //стрим
-                .map(f -> f.getValue()) //мэплю значение
-                .collect(Collectors.toList()); //собираю в лист
+        List<Accident> list = accidentMem.getAccidentsList();
         model.addAttribute("list", list);
         return "index";
     }
