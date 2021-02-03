@@ -3,6 +3,7 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,13 @@ public class AccidentMem {
         return List.of(new AccidentType(1, "Две машины"),
                 new AccidentType(2, "Машина и человек"),
                 new AccidentType(3, "Машина и велосиед"));
+    }
+
+
+    public List<Rule> getRules() {
+        return List.of(Rule.of(1, "Статья. 1"),
+                Rule.of(1, "Статья. 2"),
+                Rule.of(1, "Статья. 3"));
     }
 
     public Map<Integer, Accident> getAccidents() {
