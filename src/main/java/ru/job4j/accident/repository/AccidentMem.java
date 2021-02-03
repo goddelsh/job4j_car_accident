@@ -5,9 +5,7 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -32,8 +30,8 @@ public class AccidentMem {
 
     public List<Rule> getRules() {
         return List.of(Rule.of(1, "Статья. 1"),
-                Rule.of(1, "Статья. 2"),
-                Rule.of(1, "Статья. 3"));
+                Rule.of(2, "Статья. 2"),
+                Rule.of(3, "Статья. 3"));
     }
 
     public Map<Integer, Accident> getAccidents() {
@@ -54,5 +52,11 @@ public class AccidentMem {
 
     public void edit(Accident accident) {
         this.accidents.computeIfPresent(accident.getId(), (key, value) -> accident);
+    }
+
+    public Set<Rule> getRulesByIds(String[] rIds) {
+        return this.getRules().stream()
+                .filter(elem -> Arrays.binarySearch(rIds, String.valueOf(elem.getId())) > 0)
+                .collect(Collectors.toSet()) ;
     }
 }
