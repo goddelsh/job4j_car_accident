@@ -10,20 +10,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
 @Controller
 public class IndexControl {
 
-    final private AccidentMem accidentMem;
+    final private AccidentJdbcTemplate accidentMem;
 
-    public IndexControl(AccidentMem accidentMem) {
+    public IndexControl(AccidentJdbcTemplate accidentMem) {
         this.accidentMem = accidentMem;
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Accident> list = accidentMem.getAccidentsList();
+        List<Accident> list = accidentMem.getAll();
         model.addAttribute("list", list);
         return "index";
     }
