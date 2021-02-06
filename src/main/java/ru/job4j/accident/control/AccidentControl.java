@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentHibernate;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
@@ -18,9 +19,9 @@ import java.util.List;
 
 @Controller
 public class AccidentControl {
-    private final AccidentJdbcTemplate accidents;
+    private final AccidentHibernate accidents;
 
-    public AccidentControl(AccidentJdbcTemplate accidents) {
+    public AccidentControl(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
 

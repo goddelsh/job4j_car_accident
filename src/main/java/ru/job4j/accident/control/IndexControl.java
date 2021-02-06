@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.repository.AccidentHibernate;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
 @Controller
 public class IndexControl {
 
-    final private AccidentJdbcTemplate accidentMem;
+    final private AccidentHibernate accidentMem;
 
-    public IndexControl(AccidentJdbcTemplate accidentMem) {
+    public IndexControl(AccidentHibernate accidentMem) {
         this.accidentMem = accidentMem;
     }
 

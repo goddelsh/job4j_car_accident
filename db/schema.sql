@@ -9,7 +9,7 @@ CREATE TABLE accident_rules (
 );
 
 
-CREATE TABLE accidents_rules (
+CREATE TABLE accident_accident_rules (
   id serial primary key,
   accident_id integer,
   rule_id integer,
