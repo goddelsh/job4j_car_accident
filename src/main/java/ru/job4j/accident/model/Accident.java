@@ -18,7 +18,13 @@ public class Accident {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private AccidentType type;
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+
+    @ManyToMany(targetEntity = Rule.class, cascade = { CascadeType.MERGE})
+    @JoinTable(
+            name = "accident_accident_rules",
+            joinColumns = { @JoinColumn(name = "accident_id") },
+            inverseJoinColumns = { @JoinColumn(name = "rule_id") }
+    )
     private Set<Rule> rules = new HashSet<>();
 
     public Accident(String name) {

@@ -1,7 +1,9 @@
 package ru.job4j.accident.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -12,6 +14,9 @@ public class Rule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+
+    @ManyToMany(mappedBy = "rules")
+    private Set<Accident> accidents = new HashSet<>();
 
     public static Rule of(int id, String name) {
         Rule rule = new Rule();
@@ -51,5 +56,13 @@ public class Rule {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Set<Accident> getAccidents() {
+        return accidents;
+    }
+
+    public void setAccidents(Set<Accident> accidents) {
+        this.accidents = accidents;
     }
 }
