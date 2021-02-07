@@ -19,11 +19,11 @@ public class Accident {
     @JoinColumn(name = "type_id")
     private AccidentType type;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Rule.class, cascade = { CascadeType.MERGE })
     @JoinTable(
             name = "accidents_rules",
-            joinColumns = @JoinColumn(name = "accident_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "accident_id"),
+            inverseJoinColumns = @JoinColumn(name = "rule_id")
     )
     private Set<Rule> rules = new HashSet<>();
 
