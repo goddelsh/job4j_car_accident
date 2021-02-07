@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "accident")
+@Table(name = "accidents")
 public class Accident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,15 @@ public class Accident {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private AccidentType type;
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "accidents_rules",
+            joinColumns = @JoinColumn(name = "accident_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "rule_id", referencedColumnName = "id")
+    )
     private Set<Rule> rules = new HashSet<>();
+
 
     public Accident(String name) {
         this.name = name;

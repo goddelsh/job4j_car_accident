@@ -9,7 +9,7 @@ CREATE TABLE accident_rules (
 );
 
 
-CREATE TABLE accident_accident_rules (
+CREATE TABLE accidents_rules (
   id serial primary key,
   accident_id integer,
   rule_id integer,
@@ -30,6 +30,6 @@ insert into accident_types (name) values ('Две машины');
 insert into accident_types (name) values ('Машина и человек');
 insert into accident_types (name) values ('Машина и велосиед');
 
-insert into accident_rules (name) values ('Статья. 1');
-insert into accident_rules (name) values ('Статья. 2');
-insert into accident_rules (name) values ('Статья. 3');
+insert into rules (name) values ('Статья. 1');
+insert into rules (name) values ('Статья. 2');
+insert into rules (name) values ('Статья. 3');
