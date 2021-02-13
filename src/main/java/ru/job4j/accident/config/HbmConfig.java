@@ -18,6 +18,8 @@ import java.util.Properties;
 @PropertySource("classpath:app.properties")
 @EnableTransactionManagement
 public class HbmConfig {
+
+
     @Bean
     public DataSource ds(@Value("${jdbc.driver}") String driver,
                          @Value("${jdbc.url}") String url,
@@ -30,6 +32,8 @@ public class HbmConfig {
         ds.setPassword(password);
         return ds;
     }
+
+
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(@Value("${hibernate.dialect}") String dialect,
@@ -55,4 +59,5 @@ public class HbmConfig {
         tx.setSessionFactory(sf);
         return tx;
     }
+
 }
