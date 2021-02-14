@@ -14,6 +14,10 @@ public class User {
     private String password;
     private boolean enabled = true;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "authority_id")
+    Authorities authorities;
+
     public Integer getId() {
         return id;
     }
@@ -44,5 +48,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Authorities getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Authorities authorities) {
+        this.authorities = authorities;
     }
 }

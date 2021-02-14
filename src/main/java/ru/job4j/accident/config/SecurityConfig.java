@@ -7,9 +7,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.job4j.accident.model.Authorities;
+import ru.job4j.accident.model.User;
+import ru.job4j.accident.repository.UserRepository;
 
 import javax.sql.DataSource;
 
@@ -17,19 +19,31 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    DataSource ds;
+    final DataSource ds;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    public SecurityConfig(DataSource ds, UserRepository userRepository) {
+        this.ds = ds;
+        if (!userRepository.findAll().iterator().hasNext()) {
+            User user = new User();
+            user.setUsername("root");
+            user.setPassword("$2a$10$YP.uHMb9ff6HVG3VPp02NO2.zWsuxvV9nRJh4fuIpTjg57/RUBzbC");
+            Authorities authorities = new Authorities();
+            authorities.setAuthority("ROLE_ADMIN");
+            user.setAuthorities(authorities);
+            userRepository.save(user);
+        }
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception { ;
-        auth.jdbcAuthentication()
-                .dataSource(ds)
-                .withUser(User.withUsername("user")
-                        .password(passwordEncoder().encode("123456"))
-                        .roles("USER"));
+        auth.jdbcAuthentication().dataSource(ds)
+                .usersByUsernameQuery("select username, password, enabled "
+                        + "from users "
+                        + "where username = ?")
+                .authoritiesByUsernameQuery(
+                        " select u.username, a.authority "
+                                + "from authorities as a, users as u "
+                                + "where u.username = ? and u.authority_id =  a.id");
     }
 
     @Bean

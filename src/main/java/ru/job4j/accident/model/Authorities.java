@@ -12,9 +12,6 @@ public class Authorities {
     private Integer id;
     private  String authority;
 
-    @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private User user;
 
     public Integer getId() {
         return id;
@@ -32,12 +29,4 @@ public class Authorities {
         this.authority = authority;
     }
 
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
